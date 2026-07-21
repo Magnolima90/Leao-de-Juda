@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thaynna Lima — lash design</title>
+<meta name="description" content="Thaynna Lima — lash design e extensão de cílios. Veja a tabela de preços e agende seu horário pelo WhatsApp.">
+<link rel="icon" type="image/png" href="fotos/logo.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Thaynna Lima — Lash Design">
+<meta property="og:description" content="Extensão de cílios, design de sobrancelhas e serviços avulsos. Confira os preços e agende seu horário.">
+<meta property="og:image" content="fotos/logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Thaynna Lima — Lash Design">
+<meta name="twitter:description" content="Extensão de cílios, design de sobrancelhas e serviços avulsos. Confira os preços e agende seu horário.">
+<meta name="twitter:image" content="fotos/logo.png">
+<style>
+  :root{
+    --dourado:#c9a24b;
+    --dourado-claro:#e6cd8f;
+    --nude:#f3ece2;
+    --nude-escuro:#e5d8c6;
+    --texto:#3a332b;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:'Segoe UI',Helvetica,Arial,sans-serif;
+    background-color:var(--nude);
+    background-image:linear-gradient(rgba(243,236,226,.85),rgba(243,236,226,.85)),url('fotos/logo.png');
+    background-repeat:no-repeat,repeat;
+    background-size:cover,900px auto;
+    background-attachment:fixed,scroll;
+    color:var(--texto);
+    line-height:1.5;
+    min-height:100vh;
+  }
+  .wrap{max-width:520px;margin:0 auto;padding:0 0 48px;}
+  header{
+    position:relative;
+    text-align:center;
+  }
+  header img{
+    width:100%;
+    display:block;
+  }
+  @keyframes entrada{
+    from{opacity:0;transform:translateY(-12px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+  .titulo, .cta-topo{
+    animation:entrada .6s ease both;
+  }
+  .cta-topo{animation-delay:.15s;}
+  .titulo{
+    text-align:center;
+    padding:28px 24px 8px;
+  }
+  .titulo h1{
+    font-size:1.9rem;
+    font-weight:600;
+    letter-spacing:2px;
+    color:var(--dourado);
+  }
+  .titulo p{
+    font-size:.95rem;
+    letter-spacing:3px;
+    text-transform:none;
+    color:var(--texto);
+    margin-top:6px;
+    opacity:.75;
+  }
+  .divisor{
+    width:70px;height:2px;
+    background:linear-gradient(90deg,transparent,var(--dourado),transparent);
+    margin:18px auto;
+  }
+  .precos, .avulso{
+    padding:8px 24px;
+  }
+  .precos h2, .avulso-grupo h2{
+    text-align:center;
+    font-size:1.15rem;
+    font-weight:600;
+    color:var(--dourado);
+    margin-bottom:18px;
+    letter-spacing:1px;
+  }
+  .avulso-grupo{margin-bottom:6px;}
+  .avulso-grupo:not(:first-child) h2{margin-top:28px;}
+  .avulso-sub{
+    text-align:center;
+    font-size:.8rem;
+    opacity:.65;
+    margin:-10px 0 16px;
+    letter-spacing:.3px;
+  }
+  .item{
+    display:block;
+    color:inherit;
+    text-decoration:none;
+    cursor:pointer;
+    padding:16px 6px;
+    border-bottom:1px solid var(--nude-escuro);
+    opacity:0;
+    transform:translateY(14px);
+    transition:opacity .5s ease, transform .5s ease, background .2s ease;
+  }
+  .item:hover{background:rgba(201,162,75,.08);}
+  .item.in-view{opacity:1;transform:translateY(0);}
+  .item:last-child{border-bottom:none;}
+  .item-linha{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+  }
+  .item .nome{
+    font-size:1.02rem;
+    font-weight:500;
+  }
+  .item .linha{
+    flex:1;
+    border-bottom:1px dotted #cbb98f;
+    margin:0 10px;
+    transform:translateY(-4px);
+  }
+  .item .valor{
+    font-size:1.05rem;
+    font-weight:700;
+    color:var(--dourado);
+    white-space:nowrap;
+  }
+  .item .desc{
+    font-size:.8rem;
+    opacity:.7;
+    margin-top:6px;
+    line-height:1.4;
+  }
+  .abas{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    padding:0 24px 16px;
+    justify-content:center;
+  }
+  .aba-btn{
+    flex:1;
+    max-width:170px;
+    padding:10px 12px;
+    border-radius:20px;
+    border:1px solid var(--dourado);
+    background:transparent;
+    color:var(--dourado);
+    font-family:inherit;
+    font-size:.82rem;
+    font-weight:600;
+    letter-spacing:.3px;
+    cursor:pointer;
+    transition:background .2s,color .2s;
+  }
+  .aba-btn.ativa{
+    background:var(--dourado);
+    color:#fff;
+  }
+  .painel{display:none;}
+  @keyframes painelIn{
+    from{opacity:0;transform:translateY(6px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+  .painel.ativo{display:block;animation:painelIn .35s ease both;}
+  .grade-produtos{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+  }
+  .produto{
+    display:block;
+    background:#fff;
+    border-radius:14px;
+    overflow:hidden;
+    border:1px solid var(--nude-escuro);
+    text-decoration:none;
+    color:inherit;
+    -webkit-tap-highlight-color:transparent;
+    opacity:0;
+    transform:translateY(14px);
+    transition:opacity .5s ease, transform .5s ease, box-shadow .2s ease;
+  }
+  .produto.in-view{opacity:1;transform:translateY(0);}
+  .produto:hover{box-shadow:0 8px 18px rgba(0,0,0,.1);}
+  .produto:active{transform:scale(.96);transition:transform .1s ease;}
+  .produto img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    display:block;
+  }
+  .produto-info{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:2px;
+    padding:8px 6px;
+    text-align:center;
+  }
+  .produto-nome{
+    font-size:.68rem;
+    font-weight:600;
+    line-height:1.2;
+  }
+  .produto-preco{
+    font-size:.8rem;
+    font-weight:700;
+    color:var(--dourado);
+    white-space:nowrap;
+  }
+  .rodape{
+    text-align:center;
+    padding:34px 24px 0;
+  }
+  .rodape .monograma{
+    font-size:1.6rem;
+    color:var(--dourado);
+    letter-spacing:4px;
+    font-weight:600;
+  }
+  .rodape p{
+    font-size:.85rem;
+    opacity:.7;
+    margin-top:8px;
+  }
+  .contatos{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    padding:22px 24px 0;
+  }
+  .btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    padding:15px 18px;
+    border-radius:14px;
+    text-decoration:none;
+    font-size:1rem;
+    font-weight:600;
+    letter-spacing:.5px;
+    transition:opacity .2s;
+  }
+  .btn:active{opacity:.8;}
+  .btn svg{width:22px;height:22px;flex-shrink:0;}
+  .btn-wpp{
+    background:#25d366;
+    color:#fff;
+  }
+  .cta-topo{
+    padding:16px 24px 0;
+  }
+  @keyframes pulsoWpp{
+    0%,100%{box-shadow:0 8px 18px rgba(37,211,102,.28);}
+    50%{box-shadow:0 8px 26px rgba(37,211,102,.6);}
+  }
+  .cta-topo .btn{
+    box-shadow:0 8px 18px rgba(37,211,102,.28);
+    animation:pulsoWpp 2.4s ease-in-out infinite;
+  }
+  .btn-insta{
+    background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
+    color:#fff;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important;transition:none !important;}
+    .produto, .item{opacity:1;transform:none;}
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <img src="fotos/capa-thaynna.jpg" alt="Thaynna Lima" loading="eager" decoding="async">
+    </header>
+
+    <div class="titulo">
+      <h1>Thaynna Lima</h1>
+      <p>lash design · extensão de cílios</p>
+    </div>
+
+    <div class="cta-topo">
+      <a class="btn btn-wpp" href="https://wa.me/5585989179901?text=Ol%C3%A1%20Thaynna!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.2s-.8 1-1 1.2c-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6l-.9-2.1c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.4zM12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2z"/></svg>
+        Agendar agora
+      </a>
+    </div>
+
+    <div class="divisor"></div>
+
+    <div class="abas">
+      <button class="aba-btn ativa" data-aba="cilios" type="button">Extensão de Cílios</button>
+      <button class="aba-btn" data-aba="labios" type="button">Lábios</button>
+      <button class="aba-btn" data-aba="avulso" type="button">Outros Serviços</button>
+      <button class="aba-btn" data-aba="curso" type="button">Curso</button>
+    </div>
+
+    <section class="precos painel ativo" id="painel-cilios">
+      <h2>Tabela de Preços</h2>
+      <div class="grade-produtos">
+        <a class="produto" href="https://wa.me/5585989179901?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20tenho%20interesse%20no%20servi%C3%A7o%20Volume%20Brasileiro.%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio.%20Quais%20datas%20e%20hor%C3%A1rios%20est%C3%A3o%20dispon%C3%ADveis%3F" target="_blank" rel="noopener">
+          <img src="fotos/volume-brasileiro125.jpeg" alt="Volume Brasileiro" loading="lazy" decoding="async">
+          <div class="produto-info">
+            <span class="produto-nome">Volume Brasileiro</span>
+            <span class="produto-preco">R$ 125</span>
+          </div>
+        </a>
+        <a class="produto" href="https://wa.me/5585989179901?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20tenho%20interesse%20no%20servi%C3%A7o%20Volume%206D.%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio.%20Quais%20datas%20e%20hor%C3%A1rios%20est%C3%A3o%20dispon%C3%ADveis%3F" target="_blank" rel="noopener">
+          <img src="fotos/volume-6d140.jpeg" alt="Volume 6D" loading="lazy" decoding="async">
+          <div class="produto-info">
+            <span class="produto-nome">Volume 6D</span>
+            <span class="produto-preco">R$ 140</span>
+          </div>
+        </a>
+        <a class="produto" href="https://wa.me/5585989179901?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20tenho%20interesse%20no%20servi%C3%A7o%20Volume%20Luxo%205D.%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio.%20Quais%20datas%20e%20hor%C3%A1rios%20est%C3%A3o%20dispon%C3%ADveis%3F" target="_blank" rel="noopener">
+          <img src="fotos/volume-luxo-5d130.jpeg" alt="Volume Luxo 5D" loading="lazy" decoding="async">
+          <div class="produto-info">
+            <span class="produto-nome">Volume Luxo 5D</span>
+            <span class="produto-preco">R$ 130</span>
+          </div>
+        </a>
+        <a class="produto" href="https://wa.me/5585989179901?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20tenho%20interesse%20no%20servi%C3%A7o%20Capping%205D.%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio.%20Quais%20datas%20e%20hor%C3%A1rios%20est%C3%A3o%20dispon%C3%ADveis%3F" target="_blank" rel="noopener">
+          <img src="fotos/capping-5d160.jpeg" alt="Capping 5D" loading="lazy" decoding="async">
+          <div class="produto-info">
+            <span class="produto-nome">Capping 5D</span>
+            <span class="produto-preco">R$ 160</span>
+          </div>
+        </a>
+        <a class="produto" href="https://wa.me/5585989179901?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20tenho%20interesse%20no%20servi%C3%A7o%20Volume%20Express%205D.%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio.%20Quais%20datas%20e%20hor%C3%A1rios%20est%C3%A3o%20dispon%C3%ADveis%3F" target="_blank" rel="noopener">
+          <img src="fotos/volume-express-5d110.jpeg" alt="Volume Express 5D" loading="lazy" decoding="async">
+          <div class="produto-info">
+            <span class="produto-nome">Volume Express 5D</span>
+            <span class="produto-preco">R$ 110</span>
+          </div>
+        </a>
+        <a class="produto" href="https://wa.me/5585989179901?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20tenho%20interesse%20no%20servi%C3%A7o%20Fox.%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio.%20Quais%20datas%20e%20hor%C3%A1rios%20est%C3%A3o%20dispon%C3%ADveis%3F" target="_blank" rel="noopener">
+          <img src="fotos/fox140.jpeg" alt="Fox" loading="lazy" decoding="async">
+          <div class="produto-info">
+            <span class="produto-nome">Fox</span>
+            <span class="produto-preco">R$ 140</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="precos painel" id="painel-labios">
+      <h2>Lábios</h2>
+      <div class="grade-produtos">
+        <a class="produto" href="https://wa.me/5585989179901?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20tenho%20interesse%20no%20servi%C3%A7o%20Hidra%20Glos.%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio.%20Quais%20datas%20e%20hor%C3%A1rios%20est%C3%A3o%20dispon%C3%ADveis%3F" target="_blank" rel="noopener">
+          <img src="fotos/micro-labial200.jpeg" alt="Hidra Glos" loading="lazy" decoding="async">
+          <div class="produto-info">
+            <span class="produto-nome">Hidra Glos</span>
+            <span class="produto-preco">R$ 60</span>
+          </div>
+        </a>
+        <a class="produto" href="https://wa.me/5585989179901?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20tenho%20interesse%20no%20servi%C3%A7o%20Micropigmenta%C3%A7%C3%A3o%20Labial.%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio.%20Quais%20datas%20e%20hor%C3%A1rios%20est%C3%A3o%20dispon%C3%ADveis%3F" target="_blank" rel="noopener">
+          <img src="fotos/hidroglos60.jpeg" alt="Micropigmentação Labial" loading="lazy" decoding="async">
+          <div class="produto-info">
+            <span class="produto-nome">Micropigmentação Labial</span>
+            <span class="produto-preco">R$ 200</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="avulso painel" id="painel-avulso">
+      <div class="avulso-grupo">
+        <h2>Outros serviços</h2>
+        <p class="avulso-sub">Beleza em cada detalhe, do olhar ao acabamento.</p>
+
+        <a class="item" href="https://wa.me/5585989179901?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20tenho%20interesse%20no%20servi%C3%A7o%20Design%20de%20sobrancelhas%20c%2Fhenna%20personalizado.%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio.%20Quais%20datas%20e%20hor%C3%A1rios%20est%C3%A3o%20dispon%C3%ADveis%3F" target="_blank" rel="noopener">
+          <div class="item-linha">
+            <span class="nome">Design de sobrancelhas c/henna personalizado</span>
+            <span class="linha"></span>
+            <span class="valor">R$ 40,00</span>
+          </div>
+          <p class="desc">Design exclusivo com mapeamento facial e aplicação de henna premium para realçar o formato natural das sobrancelhas.</p>
+        </a>
+        <a class="item" href="https://wa.me/5585989179901?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20tenho%20interesse%20no%20servi%C3%A7o%20Design%20simples.%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio.%20Quais%20datas%20e%20hor%C3%A1rios%20est%C3%A3o%20dispon%C3%ADveis%3F" target="_blank" rel="noopener">
+          <div class="item-linha">
+            <span class="nome">Design simples</span>
+            <span class="linha"></span>
+            <span class="valor">R$ 30,00</span>
+          </div>
+          <p class="desc">Limpeza e alinhamento natural dos fios, ideal para manutenção.</p>
+        </a>
+        <a class="item" href="https://wa.me/5585989179901?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20tenho%20interesse%20no%20servi%C3%A7o%20Brow%20lamination.%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio.%20Quais%20datas%20e%20hor%C3%A1rios%20est%C3%A3o%20dispon%C3%ADveis%3F" target="_blank" rel="noopener">
+          <div class="item-linha">
+            <span class="nome">Brow lamination</span>
+            <span class="linha"></span>
+            <span class="valor">R$ 75,00</span>
+          </div>
+          <p class="desc">Efeito lifting e definição total das sobrancelhas. Resultado duradouro e sofisticado.</p>
+        </a>
+      </div>
+
+      <div class="avulso-grupo">
+        <h2>Remoção</h2>
+
+        <a class="item" href="https://wa.me/5585989179901?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20tenho%20interesse%20no%20servi%C3%A7o%20Remo%C3%A7%C3%A3o%20de%20outra%20profissional.%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio.%20Quais%20datas%20e%20hor%C3%A1rios%20est%C3%A3o%20dispon%C3%ADveis%3F" target="_blank" rel="noopener">
+          <div class="item-linha">
+            <span class="nome">Remoção de outra profissional</span>
+            <span class="linha"></span>
+            <span class="valor">R$ 50,00</span>
+          </div>
+          <p class="desc">Remoção completa, segura e delicada, preservando os fios naturais.</p>
+        </a>
+        <a class="item" href="https://wa.me/5585989179901?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20tenho%20interesse%20no%20servi%C3%A7o%20Remo%C3%A7%C3%A3o%20%2B%20nova%20aplica%C3%A7%C3%A3o.%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio.%20Quais%20datas%20e%20hor%C3%A1rios%20est%C3%A3o%20dispon%C3%ADveis%3F" target="_blank" rel="noopener">
+          <div class="item-linha">
+            <span class="nome">Remoção + nova aplicação</span>
+            <span class="linha"></span>
+            <span class="valor">R$ 20,00</span>
+          </div>
+          <p class="desc">Serviço de remoção seguido da aplicação de um novo design.</p>
+        </a>
+        <a class="item" href="https://wa.me/5585989179901?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20tenho%20interesse%20no%20servi%C3%A7o%20Remo%C3%A7%C3%A3o%20do%20meu%20trabalho.%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio.%20Quais%20datas%20e%20hor%C3%A1rios%20est%C3%A3o%20dispon%C3%ADveis%3F" target="_blank" rel="noopener">
+          <div class="item-linha">
+            <span class="nome">Remoção do meu trabalho</span>
+            <span class="linha"></span>
+            <span class="valor">R$ 40,00</span>
+          </div>
+          <p class="desc">Remoção suave para clientes que já realizaram o procedimento comigo.</p>
+        </a>
+      </div>
+
+      <div class="avulso-grupo">
+        <h2>Adicionais</h2>
+
+        <a class="item" href="https://wa.me/5585989179901?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20tenho%20interesse%20no%20servi%C3%A7o%20Bu%C3%A7o.%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio.%20Quais%20datas%20e%20hor%C3%A1rios%20est%C3%A3o%20dispon%C3%ADveis%3F" target="_blank" rel="noopener">
+          <div class="item-linha">
+            <span class="nome">Buço</span>
+            <span class="linha"></span>
+            <span class="valor">R$ 10,00</span>
+          </div>
+          <p class="desc">Finalização impecável para um olhar ainda mais limpo e harmonioso.</p>
+        </a>
+      </div>
+
+    </section>
+
+    <section class="avulso painel" id="painel-curso">
+      <div class="avulso-grupo">
+        <h2>Cursos VIP</h2>
+
+        <a class="item" href="https://wa.me/5585989179901?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20tenho%20interesse%20no%20servi%C3%A7o%20Curso%20VIP%20%E2%80%94%20Iniciante%20ao%20Avan%C3%A7ado.%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio.%20Quais%20datas%20e%20hor%C3%A1rios%20est%C3%A3o%20dispon%C3%ADveis%3F" target="_blank" rel="noopener">
+          <div class="item-linha">
+            <span class="nome">Curso VIP — Iniciante ao Avançado</span>
+          </div>
+          <p class="desc">Duração: 2 dias. Formação completa, do zero à técnica avançada. Ideal para quem deseja iniciar uma nova carreira com excelência.</p>
+        </a>
+        <a class="item" href="https://wa.me/5585989179901?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20tenho%20interesse%20no%20servi%C3%A7o%20Curso%20VIP%20%E2%80%94%20Aperfei%C3%A7oamento%20Avan%C3%A7ado.%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio.%20Quais%20datas%20e%20hor%C3%A1rios%20est%C3%A3o%20dispon%C3%ADveis%3F" target="_blank" rel="noopener">
+          <div class="item-linha">
+            <span class="nome">Curso VIP — Aperfeiçoamento Avançado</span>
+          </div>
+          <p class="desc">Duração: 1 dia. Aperfeiçoamento técnico voltado a profissionais já atuantes na área.</p>
+        </a>
+      </div>
+    </section>
+
+    <div class="divisor"></div>
+
+    <div class="rodape">
+      <div class="monograma">TS</div>
+      <p>agende seu horário</p>
+    </div>
+
+    <div class="contatos">
+      <a class="btn btn-wpp" href="https://wa.me/5585989179901?text=Ol%C3%A1%20Thaynna!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.2s-.8 1-1 1.2c-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6l-.9-2.1c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.4zM12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2z"/></svg>
+        Chamar no WhatsApp
+      </a>
+      <a class="btn btn-insta" href="https://instagram.com/thaylashdesign__" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.1-1.1.1-1.7.2-2.1.4-.5.2-.9.4-1.3.8-.4.4-.6.8-.8 1.3-.2.4-.3 1-.4 2.1C2.6 9.9 2.6 10.3 2.6 12s0 2.1.1 3.3c.1 1.1.2 1.7.4 2.1.2.5.4.9.8 1.3.4.4.8.6 1.3.8.4.2 1 .3 2.1.4 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1.1-.1 1.7-.2 2.1-.4.5-.2.9-.4 1.3-.8.4-.4.6-.8.8-1.3.2-.4.3-1 .4-2.1.1-1.2.1-1.6.1-3.3s0-2.1-.1-3.3c-.1-1.1-.2-1.7-.4-2.1-.2-.5-.4-.9-.8-1.3-.4-.4-.8-.6-1.3-.8-.4-.2-1-.3-2.1-.4-1.2-.1-1.6-.1-4.7-.1zm0 3.1a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8zm0 1.8a3.1 3.1 0 1 0 0 6.2 3.1 3.1 0 0 0 0-6.2zm5.1-.2a1.15 1.15 0 1 1-2.3 0 1.15 1.15 0 0 1 2.3 0z"/></svg>
+        @thaylashdesign__
+      </a>
+    </div>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('.aba-btn').forEach(function(botao){
+      botao.addEventListener('click', function(){
+        document.querySelectorAll('.aba-btn').forEach(function(b){ b.classList.remove('ativa'); });
+        document.querySelectorAll('.painel').forEach(function(p){ p.classList.remove('ativo'); });
+        botao.classList.add('ativa');
+        document.getElementById('painel-' + botao.dataset.aba).classList.add('ativo');
+      });
+    });
+
+    var alvos = document.querySelectorAll('.produto, .item');
+    if ('IntersectionObserver' in window){
+      var observador = new IntersectionObserver(function(entradas){
+        entradas.forEach(function(entrada){
+          if (entrada.isIntersecting){
+            entrada.target.classList.add('in-view');
+            observador.unobserve(entrada.target);
+          }
+        });
+      }, { threshold: .15 });
+      alvos.forEach(function(el){ observador.observe(el); });
+    } else {
+      alvos.forEach(function(el){ el.classList.add('in-view'); });
+    }
+  </script>
+</body>
+</html>
