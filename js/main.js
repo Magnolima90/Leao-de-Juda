@@ -46,7 +46,7 @@ const ADDON_GROUPS = [
   },
   {
     name: 'Complementos',
-    items: ['Granola', 'Paçoca', 'Castanha Triturada', 'Disquete', 'Chocolate Granulado', 'Gotas de Chocolate', 'Leite em Pó', 'Leite Condensado', 'Marshmallow', 'Jujuba', 'Cereja', 'Ovo Maltine'],
+    items: ['Granola', 'Paçoca', 'Castanha Triturada', 'Disquete', 'Gotas de Chocolate', 'Leite em Pó', 'Leite Condensado', 'Marshmallow', 'Jujuba', 'Cereja', 'Ovo Maltine'],
   },
 ];
 
