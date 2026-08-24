@@ -39,7 +39,7 @@ const ADDON_GROUPS = [
   {
     name: 'Cremes',
     limit: 2,
-    items: ['Creme de Ninho', 'Creme de Morango', 'Creme de Cookies', 'Cobertura de Morango', 'Creme de Avelã'],
+    items: ['Creme de Ninho', 'Creme de Morango', 'Creme de Cookies', 'Creme de Avelã'],
   },
   {
     name: 'Frutas',

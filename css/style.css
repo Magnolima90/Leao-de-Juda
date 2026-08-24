@@ -910,15 +910,15 @@ img { max-width: 100%; display: block; }
   border-radius: 50%;
   border: none;
   cursor: pointer;
-  background: rgba(0,0,0,0.06);
-  color: var(--text-dark);
-  font-size: 1.6rem;
+  background: rgba(255,255,255,0.14);
+  color: var(--white);
+  font-size: 1.8rem;
   line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.modal-close:hover { background: rgba(0,0,0,0.12); }
+.modal-close:hover { background: rgba(255,255,255,0.26); }
 .modal-head {
   background: linear-gradient(160deg, var(--purple), var(--purple-dark));
   color: var(--white);
